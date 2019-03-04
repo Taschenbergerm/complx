@@ -19,6 +19,10 @@ class ComplexLineInterface(Cmd):
     A command line interface containing all the utilities for the complex team
     This includes an interface to the current trth-complex-app 
     and a panics button which tells you to calm down and gives advice
+    
+    
+    Type in `help` to  get started 
+    You can exit  with `exit`
     """
     prompt = "cplx> "
 
@@ -27,6 +31,7 @@ class ComplexLineInterface(Cmd):
         self.home = Path(os.environ.get("COMPLX_HOME"))
         self.db_path = self.home / "cplx.db"
 
+    # General Utility
     def do_initdb(self, arguments):
         """
         initdb
@@ -68,14 +73,72 @@ class ComplexLineInterface(Cmd):
         """
         version
 
-
         displays current verision
         """
         print("v.0.0.1 | Alpha ")
 
+    # the panic button
+    def do_panic(self, args):
+        pass
+
+
+    # Setup and interacting with sqlite
     def do_exit(self, args):
-        "Thanks you for using the ComplexLineInterface powerd by Data Solutions"
+        print("Thanks you for using the ComplexLineInterface powerd by Data Solutions")
         return True
+
+    def do_set(self, args):
+        """
+        set [key]  [value]
+
+        Set keys and values in the database
+        currently supported keys are :
+        =====================================
+        user            :  user for the database
+        password        :  password for the database
+        keep_download   :  optinal weather or not download files should be keep or not
+        source          :  data vendor only trth is supported currently
+        intraday        :  weather to target intraday or eod or both when a chain_ric is supplied
+        """
+
+    def do_put(self, args):
+        """
+        put [identifier] [start_date] [end_date]
+
+        puts a request into the local queue which will be processed one a master is called
+
+        Input:
+        ==========
+        identifier:     either a feed_id or a chain_ric / ric_list which will automatically be transformed to a feed_id
+                        according to the preferences set un intraday.
+                    Multiple identifiers can be supplied by surrounding them with single quotes
+        start_date:  the date from which day onwards data should be pull  format is 'YYYY-MM-DD' surrounded by quotes
+        end_date:
+
+        """
+    def do_list(self, args):
+        pass
+
+    def do_drop(self, args):
+        pass
+
+    # Complex Downloader Interaction
+    def do_foster(self, args):
+        pass
+
+    def do_emergency(self, args):
+        pass
+
+    def do_download(self, args):
+        pass
+
+    def do_check(self, args):
+        pass
+
+    def do_call(self, args):
+        pass
+
+
 
 
 if __name__ == "__main__":
